@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
+  padding: 10px 20px;
   height: 70px;
   box-shadow: 0 -20px 30px #f9f9f9;
+  background: #040714;
   .logoCta {
     width: 80px;
   }
@@ -23,6 +27,9 @@ export const HeaderWrapper = styled.nav`
       color: #000;
       background-color: #f9f9f9;
     }
+  }
+  @media (min-width: 768px) {
+    padding: 10px 40px;
   }
 `;
 export const NavMenu = styled.div`
@@ -102,6 +109,7 @@ export const AccountActionDropdown = styled.div`
   width: 100px;
   opacity: 0;
   text-align: center;
+  z-index: 10;
 `;
 export const AccountAction = styled.div`
   position: relative;

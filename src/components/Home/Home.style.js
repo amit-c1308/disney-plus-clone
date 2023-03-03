@@ -5,7 +5,7 @@ export const HomeContainer = styled.main`
   min-height: calc(100vh - 70px);
   overflow-x: hidden;
   display: block;
-  padding: 20px 40px 0;
+  padding: 10px 10px 0;
   &:after {
     background: url("/images/home-background.png") center center / cover
       no-repeat fixed;
@@ -13,5 +13,8 @@ export const HomeContainer = styled.main`
     position: absolute;
     inset: 0px;
     z-index: -1;
+  }
+  @media (min-width: 768px) {
+    padding: 20px 40px 0;
   }
 `;

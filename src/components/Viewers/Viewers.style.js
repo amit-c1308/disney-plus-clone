@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
 export const ViewerContainer = styled.div`
-  padding: 30px 0;
+  padding: 10px 0 30px;
   display: grid;
-  grid-gap: 25px;
+  grid-gap: 5px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+  @media (min-width: 768px) {
+    grid-gap: 25px;
+    padding: 30px 0;
+    // grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 `;
 
 export const ViewerItem = styled.div`
-  padding-top: 56.25%;
+  background-color: #192133;
+  padding-top: 72px;
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 69%) 0 26px 30px -10px,
     rgb(0 0 0 / 73%) 0 16px 10px -10px;
@@ -25,7 +28,8 @@ export const ViewerItem = styled.div`
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    transform: scale(1.3);
     opacity: 1;
     position: absolute;
     transition: opacity 0.5s ease-in-out 0s;
@@ -47,6 +51,13 @@ export const ViewerItem = styled.div`
     video {
       opacity: 1;
       transition: all 0.2s ease-in;
+    }
+  }
+  @media (min-width: 768px) {
+    padding-top: 56.25%;
+    img {
+      object-fit: cover;
+      transform: scale(1);
     }
   }
 `;

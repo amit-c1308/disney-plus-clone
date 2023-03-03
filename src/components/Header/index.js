@@ -17,6 +17,7 @@ import {
 } from "../../features/user/userSlice";
 import { useEffect } from "react";
 import { AccountAction, AccountActionDropdown } from "../Header/Header.style";
+import { setUserLoginState } from "../../features/utils";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,13 @@ const Header = () => {
     appAuth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        navigate("/home");
+        setUserLoginState(user);
+        navigate(
+          window.location.pathname === "/" ||
+            window.location.pathname === undefined
+            ? "/home"
+            : window.location.pathname
+        );
       } else navigate("/");
     });
   }, [userName]);

@@ -13,6 +13,7 @@ import {
 } from "../../features/movie/movieSlice";
 import { selectUserName } from "../../features/user/userSlice";
 import Showcase from "../Showcase";
+import { fetchMovies } from "../../features/utils";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,72 +22,70 @@ const Home = () => {
   const newDisneyMovies = useSelector(selectNewDisney);
   const originalMovies = useSelector(selectOriginals);
   const trendingMovies = useSelector(selectTrending);
-  let recommends = [];
-  let newDisney = [];
-  let originals = [];
-  let trending = [];
-
-  const fetchData = async () => {
-    return await getDocs(collection(db, "movies"));
-  };
 
   useEffect(() => {
-    fetchData().then((snapshot) => {
-      snapshot.forEach((doc) => {
-        switch (doc.data().type) {
-          case "recommend":
-            recommends = [
-              ...recommends,
-              {
-                id: doc.id,
-                ...doc.data(),
-              },
-            ];
-            break;
-          case "new":
-            newDisney = [
-              ...newDisney,
-              {
-                id: doc.id,
-                ...doc.data(),
-              },
-            ];
-            break;
-          case "original":
-            originals = [
-              ...originals,
-              {
-                id: doc.id,
-                ...doc.data(),
-              },
-            ];
-            break;
-          case "trending":
-            trending = [
-              ...trending,
-              {
-                id: doc.id,
-                ...doc.data(),
-              },
-            ];
-            break;
-        }
-      });
-      console.log("data", {
-        recommends,
-        newDisney,
-        originals,
-        trending,
-      });
-      dispatch(
-        setMovies({
+    if (userName) {
+      let recommends = [];
+      let newDisney = [];
+      let originals = [];
+      let trending = [];
+      fetchMovies("movies").then((snapshot) => {
+        snapshot.forEach((doc) => {
+          switch (doc.data().type) {
+            case "recommend":
+              recommends = [
+                ...recommends,
+                {
+                  id: doc.id,
+                  ...doc.data(),
+                },
+              ];
+              break;
+            case "new":
+              newDisney = [
+                ...newDisney,
+                {
+                  id: doc.id,
+                  ...doc.data(),
+                },
+              ];
+              break;
+            case "original":
+              originals = [
+                ...originals,
+                {
+                  id: doc.id,
+                  ...doc.data(),
+                },
+              ];
+              break;
+            case "trending":
+              trending = [
+                ...trending,
+                {
+                  id: doc.id,
+                  ...doc.data(),
+                },
+              ];
+              break;
+          }
+        });
+        console.log("data", {
           recommends,
           newDisney,
           originals,
           trending,
-        })
-      );
-    });
+        });
+        dispatch(
+          setMovies({
+            recommends,
+            newDisney,
+            originals,
+            trending,
+          })
+        );
+      });
+    }
   }, [userName]);
 
   return (

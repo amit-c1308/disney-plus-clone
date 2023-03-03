@@ -28,7 +28,7 @@ export const ShowcaseWrapper = styled.div`
       inset: 0;
       display: block;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
       opacity: 1;
       position: absolute;
       transition: opacity 0.5s ease-in-out 0s;
