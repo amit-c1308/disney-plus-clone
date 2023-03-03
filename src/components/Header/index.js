@@ -61,7 +61,7 @@ const Header = () => {
           })
       : signOut(appAuth).then(() => {
           dispatch(setSignOutState());
-          navigate("/");
+          navigate("/").catch((err) => console.log(err.message));
         });
   };
 
