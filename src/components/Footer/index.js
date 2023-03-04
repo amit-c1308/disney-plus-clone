@@ -29,7 +29,7 @@ const Footer = () => {
               <a href="https://careers.hotstar.com/">Careers</a>
             </li>
           </ul>
-          <p class="copyright">
+          <p className="copyright">
             © 2023 STAR. All Rights Reserved. HBO, Home Box Office and all
             related channel and programming logos are service marks of, and all
             related programming visuals and elements are the property of, Home
@@ -49,7 +49,7 @@ const Footer = () => {
           <div className="app">
             <p className="title">Disney+ Hotstar App</p>
             <a
-              class="playstore"
+              className="playstore"
               href="https://play.google.com/store/apps/details?id=in.startv.hotstar"
               target="_blank"
               rel="noopener noreferrer"
@@ -57,7 +57,7 @@ const Footer = () => {
               &nbsp;
             </a>
             <a
-              class="appstore"
+              className="appstore"
               href="https://itunes.apple.com/in/app/hotstar/id934459219?mt=8"
               target="_blank"
               rel="noopener noreferrer"

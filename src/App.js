@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  HashRouter,
+} from "react-router-dom";
 import LoginPage from "./components/Login";
 import "./App.css";
 import Header from "./components/Header";
@@ -9,7 +14,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <HashRouter>
         <Header />
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
@@ -17,7 +22,7 @@ function App() {
           <Route exact path="/detail/:id" element={<Detail />} />
         </Routes>
         <Footer />
-      </Router>
+      </HashRouter>
     </div>
   );
 }
