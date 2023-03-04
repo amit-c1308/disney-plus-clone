@@ -1,12 +1,7 @@
 import React from "react";
 import { HeaderWrapper, NavMenu, UserImg } from "./Header.style";
 import { appAuth, provider } from "../../firebase";
-import {
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -54,17 +49,16 @@ const Header = () => {
     !userName
       ? signInWithPopup(appAuth, provider)
           .then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
             const user = result.user;
-            console.log(token, user);
             setUser(user);
           })
           .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            const email = error.customData.email;
-            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(
+              "An Error Occured ",
+              error.code,
+              " with message :",
+              error.message
+            );
           })
       : signOut(appAuth).then(() => {
           dispatch(setSignOutState());
@@ -75,7 +69,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <a href="/" className="logoCta">
-        <img className="logo" src="./images/logo.svg" />
+        <img className="logo" src="./images/logo.svg" alt="logo" />
       </a>
       {!userName ? (
         <button className="loginBtn" onClick={handleAuth}>
@@ -85,27 +79,27 @@ const Header = () => {
         <>
           <NavMenu>
             <a href="/home">
-              <img src="/images/home-icon.svg" />
+              <img src="/images/home-icon.svg" alt="home" />
               <span>HOME</span>
             </a>
             <a href="/search">
-              <img src="/images/search-icon.svg" />
+              <img src="/images/search-icon.svg" alt="search" />
               <span>SEARCH</span>
             </a>
             <a href="/watchlist">
-              <img src="/images/watchlist-icon.svg" />
+              <img src="/images/watchlist-icon.svg" alt="watchlist" />
               <span>WATCHLIST</span>
             </a>
             <a href="/originals">
-              <img src="/images/original-icon.svg" />
+              <img src="/images/original-icon.svg" alt="originals" />
               <span>ORIGINALS</span>
             </a>
             <a href="/movies">
-              <img src="/images/movie-icon.svg" />
+              <img src="/images/movie-icon.svg" alt="movies" />
               <span>MOVIES</span>
             </a>
             <a href="/series">
-              <img src="/images/series-icon.svg" />
+              <img src="/images/series-icon.svg" alt="series" />
               <span>SERIES</span>
             </a>
           </NavMenu>
