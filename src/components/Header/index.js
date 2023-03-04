@@ -12,7 +12,7 @@ import {
 } from "../../features/user/userSlice";
 import { useEffect } from "react";
 import { AccountAction, AccountActionDropdown } from "../Header/Header.style";
-import { setUserLoginState } from "../../features/utils";
+import { checkLoginStatus, setUserLoginState } from "../../features/utils";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,14 +33,10 @@ const Header = () => {
   useEffect(() => {
     appAuth.onAuthStateChanged(async (user) => {
       if (user) {
-        setUser(user);
-        setUserLoginState(user);
-        navigate(
-          window.location.pathname === "/" ||
-            window.location.pathname === undefined
-            ? "/home"
-            : window.location.pathname
-        );
+        if (!checkLoginStatus() || !userName) {
+          setUser(user);
+          setUserLoginState(user);
+        }
       } else navigate("/");
     });
   }, [userName]);
