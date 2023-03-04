@@ -3,7 +3,6 @@ import { HomeContainer } from "./Home.style";
 import ImgSlider from "../ImgSlider";
 import Viewers from "../Viewers";
 import { useDispatch, useSelector } from "react-redux";
-import db, { collection, getDocs } from "../../firebase";
 import {
   selectNewDisney,
   selectOriginals,
@@ -25,11 +24,11 @@ const Home = () => {
 
   useEffect(() => {
     if (userName) {
-      let recommends = [];
-      let newDisney = [];
-      let originals = [];
-      let trending = [];
       fetchMovies("movies").then((snapshot) => {
+        let recommends = [];
+        let newDisney = [];
+        let originals = [];
+        let trending = [];
         snapshot.forEach((doc) => {
           switch (doc.data().type) {
             case "recommend":
@@ -68,13 +67,9 @@ const Home = () => {
                 },
               ];
               break;
+            default:
+              break;
           }
-        });
-        console.log("data", {
-          recommends,
-          newDisney,
-          originals,
-          trending,
         });
         dispatch(
           setMovies({
